@@ -28,7 +28,11 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
-    products = models.ManyToManyField(Product, through="OrderProduct")
+    products = models.ManyToManyField(
+        Product,
+        through="OrderProduct",
+        related_name="orders",
+    )
 
     def __str__(self) -> str:
         return "{}-{}-{}".format(self.customer, self.merchant, self.order_date)

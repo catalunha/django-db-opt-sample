@@ -24,3 +24,9 @@ python manage.py runserver 8001
 6. The server should now be up, and admin portal should be available at [http://localhost:8001/admin]()
 
 # Minhas anotações
+Admin
+username: catalunha
+senha: drf@1234
+
+Artigo deste repo
+https://python.plainenglish.io/django-orm-mastering-performance-with-select-related-and-prefetch-related-48c0958fe8be

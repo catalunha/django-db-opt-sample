@@ -13,8 +13,18 @@ class CustomPagination(PageNumberPagination):
 
 class OrderListView(ListAPIView):
     # queryset = Order.objects.all()
-    queryset = Order.objects.select_related("customer", "merchant").prefetch_related(
-        "orderproduct_set__product"
+    # queryset = Order.objects.select_related("customer").all()
+    # queryset = Order.objects.select_related("customer", "merchant").all()
+    # queryset = (
+    #     Order.objects.select_related("customer", "merchant")
+    #     .prefetch_related("orderproduct_set")
+    #     .all()
+    # )
+    queryset = (
+        Order.objects.select_related("customer", "merchant")
+        .prefetch_related("orderproduct_set__product")
+        .all()
     )
+
     serializer_class = OrderSerializer
     pagination_class = CustomPagination

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Customer, Product, Order, OrderItem, Merchant
+
+from .models import Customer, Merchant, Order, OrderProduct, Product
 
 
 @admin.register(Customer)
@@ -17,11 +18,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ("name", "price")
 
 
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
+class OrderProductInline(admin.TabularInline):
+    model = OrderProduct
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("customer", "merchant", "order_date")
-    inlines = (OrderItemInline,)
+    inlines = (OrderProductInline,)

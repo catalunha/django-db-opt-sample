@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from .models import Order, OrderItem, Customer, Merchant
+
+from .models import Customer, Merchant, Order, OrderProduct
 
 
-class OrderItemSerializer(serializers.ModelSerializer):
+class OrderProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = OrderItem
+        model = OrderProduct
         fields = ("product", "quantity")
 
 
@@ -21,10 +22,10 @@ class MerchantSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_items = OrderItemSerializer(source="orderitem_set", many=True)
+    products = OrderProductSerializer(source="orderproduct_set", many=True)
     customer = CustomerSerializer()
     merchant = MerchantSerializer()
 
     class Meta:
         model = Order
-        fields = ("customer", "merchant", "order_date", "order_items")
+        fields = ("customer", "merchant", "order_date", "products")

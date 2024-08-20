@@ -28,13 +28,13 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
-    products = models.ManyToManyField(Product, through="OrderItem")
+    products = models.ManyToManyField(Product, through="OrderProduct")
 
     def __str__(self) -> str:
         return "{}-{}-{}".format(self.customer, self.merchant, self.order_date)
 
 
-class OrderItem(models.Model):
+class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()

@@ -22,3 +22,5 @@ python manage.py runserver 8001
 ```
 
 6. The server should now be up, and admin portal should be available at [http://localhost:8001/admin]()
+
+# Minhas anotações

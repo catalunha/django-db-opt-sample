@@ -1,9 +1,11 @@
 import random
 from datetime import datetime, timedelta
-from django.utils import timezone
-from test_app.models import Customer, Merchant, Product, Order, OrderItem
-from django.db.utils import IntegrityError
+
 from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
+from django.utils import timezone
+
+from test_app.models import Customer, Merchant, Order, OrderProduct, Product
 
 
 class Command(BaseCommand):
@@ -44,11 +46,11 @@ class Command(BaseCommand):
 
                 for product in selected_products:
                     quantity = random.randint(1, 5)
-                    OrderItem.objects.create(
+                    OrderProduct.objects.create(
                         order=order, product=product, quantity=quantity
                     )
             except IntegrityError:
                 # Handle integrity errors if they occur
                 pass
 
-        self.stdout.write(self.style.SUCCESS(f"Sample data created"))
+        self.stdout.write(self.style.SUCCESS("Sample data created"))
